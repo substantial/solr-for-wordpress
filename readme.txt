@@ -8,6 +8,10 @@ Requires at least: 3.0
 Tested up to: 3.2.1
 Stable tag: 0.5.1
 
+== Update Note ==
+
+Only supports Solr4. Added multisite.
+
 A WordPress plugin that replaces the default WordPress search with Solr.
 
 == Description ==
