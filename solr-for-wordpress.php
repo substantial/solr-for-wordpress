@@ -115,6 +115,7 @@ function s4w_ping_server($server_id = NULL) {
 }
 
 function s4w_build_document( $post_info, $domain = NULL, $path = NULL) {
+    global $current_blog;
     $doc = NULL;
     $plugin_s4w_settings = s4w_get_option();
     $exclude_ids = $plugin_s4w_settings['s4w_exclude_pages'];
@@ -139,14 +140,15 @@ function s4w_build_document( $post_info, $domain = NULL, $path = NULL) {
             // if we get here we expect that we've "switched" what blog we're running
             // as
             
+            $blogid = get_current_blog_id();
+            switch_to_blog($blog_id);
             if ($domain == NULL)
                 $domain = $current_blog->domain;
             
             if ($path == NULL)
                 $path = $current_blog->path;
+            restore_current_blog();
             
-            
-            $blogid = get_current_blog_id();
             $doc->setField( 'id', $domain . $path . $post_info->ID );
             $doc->setField( 'permalink', get_blog_permalink($blogid, $post_info->ID));
             $doc->setField( 'blogid', $blogid );
